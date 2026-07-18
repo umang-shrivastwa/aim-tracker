@@ -16,6 +16,9 @@ function renderDashboard(container, state, onChange){
 
   const days = Store.daysSince(v.lockedAt);
   const today = new Date().toDateString();
+  const todayKeyStr = new Date().toISOString().slice(0,10);
+  const todayEntry = state.daily.find(d => d.date === todayKeyStr);
+  const todayTasks = todayEntry ? todayEntry.tasks : [];
   const checkedInToday = v.realignLog.some(r => new Date(r.date).toDateString() === today);
   const lastEntry = v.realignLog[v.realignLog.length - 1];
 
@@ -47,15 +50,15 @@ function renderDashboard(container, state, onChange){
         ${statTile('DIRECTIONS', v.directions.length)}
         ${statTile('ACTIVE GOALS', state.goals.filter(g=>g.status!=='Completed').length)}
         ${statTile('GOALS COMPLETED', state.goals.filter(g=>g.status==='Completed').length)}
-        ${statTile('CHECK-INS LOGGED', v.realignLog.length)}
-        ${statTile('DRIFT EVENTS', v.realignLog.filter(r=>!r.onTrack).length)}
+        ${statTile('TODAY: DONE', todayTasks.filter(t=>t.completed).length)}
+        ${statTile('TODAY: PENDING', todayTasks.filter(t=>!t.completed).length)}
       </div>
     </div>
 
     <div class="card" style="opacity:.55;">
       <p class="eyebrow">Coming next</p>
       <p style="font-size:13px; color:var(--text-dim); margin:0;">
-        Daily Execution, Learning vs Shipping, Project Tracker, Achievements and Analytics will populate this dashboard as each module ships.
+        Learning vs Shipping, Project Tracker, Achievements and Analytics will populate this dashboard as each module ships.
       </p>
     </div>
   `;
