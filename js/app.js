@@ -5,7 +5,6 @@
   const driftPill = document.getElementById('driftPill');
 
   const LOCKED_LABELS = {
-    daily: 'Daily Execution',
     more: 'More modules'
   };
 
@@ -39,6 +38,7 @@
     if (route === 'dashboard') renderDashboard(view, state, onChange);
     else if (route === 'vision') renderVision(view, state, onChange);
     else if (route === 'goals') renderGoals(view, state, onChange);
+    else if (route === 'daily') renderDaily(view, state, onChange);
     else renderLocked(route);
 
     window.location.hash = route;
@@ -54,5 +54,5 @@
 
   updateDriftPill();
   const startRoute = (window.location.hash || '#dashboard').slice(1);
-  navigate(['dashboard','vision','goals'].includes(startRoute) ? startRoute : 'dashboard');
+  navigate(['dashboard','vision','goals','daily'].includes(startRoute) ? startRoute : 'dashboard');
 })();
