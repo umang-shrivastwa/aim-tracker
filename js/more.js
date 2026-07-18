@@ -1,7 +1,7 @@
 const MORE_MODULES = [
   { id: 'learning', icon: '◐', label: 'Learning Tracker', desc: 'What you studied, hours, topic', built: true },
   { id: 'shipping', icon: '▲', label: 'Shipping Tracker', desc: 'What you actually built and shipped', built: true },
-  { id: 'projects', icon: '◫', label: 'Project Tracker', desc: 'Multi-stage projects like Fingyaan', built: false },
+  { id: 'projects', icon: '◫', label: 'Project Tracker', desc: 'Multi-stage projects like Fingyaan', built: true },
   { id: 'achievements', icon: '★', label: 'Achievement Timeline', desc: 'Your growth, recorded', built: false },
   { id: 'critical', icon: '⚠', label: 'Critical Tasks', desc: 'Must finish soon, stays visible', built: false },
   { id: 'reflection', icon: '◑', label: 'Daily Reflection', desc: 'Learned, built, tomorrow', built: false },
