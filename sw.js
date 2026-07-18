@@ -1,4 +1,4 @@
-const CACHE = 'execos-v6';
+const CACHE = 'execos-v7';
 const ASSETS = [
   './',
   './index.html',
@@ -9,6 +9,7 @@ const ASSETS = [
   './js/daily.js',
   './js/learning.js',
   './js/shipping.js',
+  './js/projects.js',
   './js/more.js',
   './js/dashboard.js',
   './js/app.js',
