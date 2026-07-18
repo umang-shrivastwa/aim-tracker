@@ -52,13 +52,15 @@ function renderDashboard(container, state, onChange){
         ${statTile('GOALS COMPLETED', state.goals.filter(g=>g.status==='Completed').length)}
         ${statTile('TODAY: DONE', todayTasks.filter(t=>t.completed).length)}
         ${statTile('TODAY: PENDING', todayTasks.filter(t=>!t.completed).length)}
+        ${statTile('HOURS LEARNED', state.learning.reduce((s,e)=>s+Number(e.hours||0),0))}
+        ${statTile('THINGS SHIPPED', state.shipping.filter(e=>e.status==='Shipped').length)}
       </div>
     </div>
 
     <div class="card" style="opacity:.55;">
       <p class="eyebrow">Coming next</p>
       <p style="font-size:13px; color:var(--text-dim); margin:0;">
-        Learning vs Shipping, Project Tracker, Achievements and Analytics will populate this dashboard as each module ships.
+        Project Tracker, Achievements, Critical Tasks, Reflection and Analytics will populate this dashboard as each module ships.
       </p>
     </div>
   `;
