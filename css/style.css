@@ -23,8 +23,8 @@ body{
   margin:0;
   background: var(--ink);
   background-image:
-    radial-gradient(circle at 15% 0%, rgba(200,149,80,0.06), transparent 40%),
-    radial-gradient(circle at 90% 100%, rgba(76,140,140,0.06), transparent 45%);
+    radial-gradient(circle at 15% 0%, rgba(255,255,255,0.05), transparent 40%),
+    radial-gradient(circle at 90% 100%, rgba(255,255,255,0.04), transparent 45%);
   color: var(--text);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
@@ -84,7 +84,7 @@ button{ font-family: inherit; }
   position: sticky;
   bottom:0;
   display:flex;
-  background: rgba(15,22,38,0.92);
+  background: rgba(10,10,10,0.92);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--border);
   padding: 8px 6px calc(8px + env(safe-area-inset-bottom));
