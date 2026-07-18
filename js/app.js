@@ -30,9 +30,12 @@
     view.appendChild(node);
   }
 
+  const SUB_ROUTES_UNDER_MORE = ['learning', 'shipping'];
+
   function navigate(route){
+    const highlightRoute = SUB_ROUTES_UNDER_MORE.includes(route) ? 'more' : route;
     [...tabbar.querySelectorAll('.tab')].forEach(t=>{
-      t.classList.toggle('active', t.dataset.route === route);
+      t.classList.toggle('active', t.dataset.route === highlightRoute);
     });
 
     if (route === 'dashboard') renderDashboard(view, state, onChange);
@@ -40,6 +43,8 @@
     else if (route === 'goals') renderGoals(view, state, onChange);
     else if (route === 'daily') renderDaily(view, state, onChange);
     else if (route === 'more') renderMore(view, state, onChange);
+    else if (route === 'learning') renderLearning(view, state, onChange);
+    else if (route === 'shipping') renderShipping(view, state, onChange);
     else renderLocked(route);
 
     window.location.hash = route;
@@ -55,5 +60,5 @@
 
   updateDriftPill();
   const startRoute = (window.location.hash || '#dashboard').slice(1);
-  navigate(['dashboard','vision','goals','daily','more'].includes(startRoute) ? startRoute : 'dashboard');
+  navigate(['dashboard','vision','goals','daily','more','learning','shipping'].includes(startRoute) ? startRoute : 'dashboard');
 })();
