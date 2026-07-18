@@ -276,6 +276,8 @@ input[type=range]{ width:100%; accent-color: var(--amber); }
 .status-in-progress{ color: var(--text); border-color: var(--border); }
 .status-blocked{ color: var(--text); border-style: dashed; }
 .status-not-started{ color: var(--text-dim); }
+.status-shipped{ color: var(--ink); background: var(--amber); border-color: var(--amber); }
+.status-abandoned{ color: var(--text-dim); text-decoration: line-through; }
 
 .progress-row{ display:flex; align-items:center; gap:10px; margin: 8px 0 10px; }
 .progress-track{
