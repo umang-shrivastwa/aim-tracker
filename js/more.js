@@ -1,53 +1,121 @@
-const MORE_MODULES = [
-  { id: 'learning', icon: '◐', label: 'Learning Tracker', desc: 'What you studied, hours, topic', built: false },
-  { id: 'shipping', icon: '▲', label: 'Shipping Tracker', desc: 'What you actually built and shipped', built: false },
-  { id: 'projects', icon: '◫', label: 'Project Tracker', desc: 'Multi-stage projects like Fingyaan', built: false },
-  { id: 'achievements', icon: '★', label: 'Achievement Timeline', desc: 'Your growth, recorded', built: false },
-  { id: 'critical', icon: '⚠', label: 'Critical Tasks', desc: 'Must finish soon, stays visible', built: false },
-  { id: 'reflection', icon: '◑', label: 'Daily Reflection', desc: 'Learned, built, tomorrow', built: false },
-  { id: 'analytics', icon: '▥', label: 'Analytics', desc: 'Stats generated from your own data', built: false },
-  { id: 'settings', icon: '⚙', label: 'Settings', desc: 'Theme, backup, export', built: false }
-];
+const SHIP_STATUSES = ['Shipped', 'In Progress', 'Abandoned'];
 
-function renderMore(container, state, onChange){
-  container.innerHTML = `
-    <p class="eyebrow">More · ${MORE_MODULES.filter(m=>m.built).length}/${MORE_MODULES.length} built</p>
-    <h1 style="font-size:22px; margin-bottom:14px;">Full module map</h1>
-    <div class="more-list"></div>
-  `;
+function renderShipping(container, state, onChange){
+  let formOpen = false;
 
-  const list = container.querySelector('.more-list');
-  list.innerHTML = MORE_MODULES.map(m => `
-    <button class="more-row ${m.built ? '' : 'unbuilt'}" data-module="${m.id}">
-      <span class="more-icon">${m.icon}</span>
-      <span class="more-text">
-        <span class="more-label">${m.label}</span>
-        <span class="more-desc">${m.desc}</span>
-      </span>
-      <span class="more-status">${m.built ? '' : 'SOON'}</span>
-    </button>
-  `).join('');
+  paint();
 
-  list.querySelectorAll('.more-row').forEach(row=>{
-    row.addEventListener('click', ()=>{
-      const mod = MORE_MODULES.find(m => m.id === row.dataset.module);
-      if (!mod.built){
-        renderComingSoon(container, mod);
-      }
+  function paint(){
+    const entries = [...state.shipping].sort((a,b) => b.date.localeCompare(a.date));
+    const shippedCount = state.shipping.filter(e => e.status === 'Shipped').length;
+
+    container.innerHTML = `
+      <button class="icon-btn" id="backBtn" style="margin-bottom:14px;">← Back</button>
+      <p class="eyebrow">Shipping Tracker · ${shippedCount} shipped total</p>
+      <h1 style="font-size:22px; margin-bottom:14px;">What you built</h1>
+
+      <div id="formSlot"></div>
+      ${!formOpen ? `<button class="btn btn-primary" id="addBtn" style="width:100%; margin-bottom:16px;">+ Log something you shipped</button>` : ''}
+
+      <div id="list"></div>
+    `;
+
+    container.querySelector('#backBtn').addEventListener('click', ()=> window.navigate('more'));
+
+    if (formOpen) renderForm(container.querySelector('#formSlot'));
+
+    const listEl = container.querySelector('#list');
+    listEl.innerHTML = entries.length
+      ? entries.map(entryHtml).join('')
+      : `<div class="empty-state">Nothing shipped yet. Learning is not enough — what did you build?</div>`;
+
+    const addBtn = container.querySelector('#addBtn');
+    if (addBtn) addBtn.addEventListener('click', ()=>{ formOpen = true; paint(); });
+
+    listEl.querySelectorAll('[data-del]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if (!confirm('Delete this entry?')) return;
+        state.shipping = state.shipping.filter(e => e.id !== btn.dataset.del);
+        onChange();
+        paint();
+      });
     });
-  });
+  }
+
+  function entryHtml(e){
+    const dateTxt = new Date(e.date).toLocaleDateString('en-IN', {day:'numeric', month:'short'});
+    const statusClass = 'status-' + e.status.toLowerCase().replace(/\s+/g,'-');
+    return `
+      <div class="card goal-card">
+        <div class="goal-top">
+          <div class="badges">
+            <span class="badge ${statusClass}">${e.status}</span>
+          </div>
+          <div class="goal-actions">
+            <button class="icon-btn" data-del="${e.id}" style="width:30px;height:30px;font-size:13px;">✕</button>
+          </div>
+        </div>
+        <h3 style="font-size:15px; margin:10px 0 4px;">${escapeHtml(e.title)}</h3>
+        ${e.description ? `<p style="font-size:13px; color:var(--text-dim); margin:0;">${escapeHtml(e.description)}</p>` : ''}
+        ${e.notes ? `<p class="goal-notes">${escapeHtml(e.notes)}</p>` : ''}
+        <div class="goal-meta" style="margin-top:8px;">⏱ ${dateTxt}</div>
+      </div>
+    `;
+  }
+
+  function renderForm(slot){
+    const today = new Date().toISOString().slice(0,10);
+    slot.innerHTML = `
+      <div class="card">
+        <p class="eyebrow">New shipping entry</p>
+        <div class="form-row">
+          <label>Title</label>
+          <input type="text" id="sTitle" placeholder="e.g. Calculator using loops" />
+        </div>
+        <div class="form-row">
+          <label>Description</label>
+          <textarea id="sDesc" rows="2" placeholder="What does it do? What problem does it solve?"></textarea>
+        </div>
+        <div class="form-row-split">
+          <div class="form-row">
+            <label>Date</label>
+            <input type="date" id="sDate" value="${today}" />
+          </div>
+          <div class="form-row">
+            <label>Status</label>
+            <select id="sStatus">
+              ${SHIP_STATUSES.map(s => `<option value="${s}">${s}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Notes</label>
+          <textarea id="sNotes" rows="2" placeholder="Optional"></textarea>
+        </div>
+        <div class="realign-actions">
+          <button class="btn" id="cancelBtn">Cancel</button>
+          <button class="btn btn-primary" id="saveBtn">Save</button>
+        </div>
+      </div>
+    `;
+
+    slot.querySelector('#cancelBtn').addEventListener('click', ()=>{ formOpen = false; paint(); });
+    slot.querySelector('#saveBtn').addEventListener('click', ()=>{
+      const title = slot.querySelector('#sTitle').value.trim();
+      if (!title){ alert('What did you ship? Add a title.'); return; }
+      state.shipping.push({
+        id: Store.uid(),
+        title,
+        description: slot.querySelector('#sDesc').value.trim(),
+        date: slot.querySelector('#sDate').value || today,
+        status: slot.querySelector('#sStatus').value,
+        notes: slot.querySelector('#sNotes').value.trim()
+      });
+      onChange();
+      formOpen = false;
+      paint();
+    });
+  }
 }
 
-function renderComingSoon(container, mod){
-  container.innerHTML = `
-    <button class="icon-btn" id="backToMore" style="margin-bottom:14px;">← Back</button>
-    <div class="module-locked">
-      <div class="locked-glyph">${mod.icon}</div>
-      <h2>${mod.label}</h2>
-      <p>${mod.desc}. This ships next, once you're ready to move past Daily Execution.</p>
-    </div>
-  `;
-  container.querySelector('#backToMore').addEventListener('click', ()=> window.navigate('more'));
-}
-
-window.renderMore = renderMore;
+window.renderShipping = renderShipping;
