@@ -353,3 +353,42 @@ input[type=range]{ width:100%; accent-color: var(--amber); }
   padding: 3px 8px;
   letter-spacing: .05em;
 }
+
+/* ---------- Projects module ---------- */
+.stage-list{ margin-top: 10px; border-top: 1px solid var(--border); padding-top: 6px; }
+
+const CACHE = 'execos-v7';
+const ASSETS = [
+  './',
+  './index.html',
+  './css/style.css',
+  './js/storage.js',
+  './js/vision.js',
+  './js/goals.js',
+  './js/daily.js',
+  './js/learning.js',
+  './js/shipping.js',
+  './js/projects.js',
+  './js/more.js',
+  './js/dashboard.js',
+  './js/app.js',
+  './manifest.json'
+];
+
+self.addEventListener('install', (e)=>{
+  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (e)=>{
+  e.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+  );
+  self.clients.claim();
+});
+
+self.addEventListener('fetch', (e)=>{
+  e.respondWith(
+    caches.match(e.request).then(cached => cached || fetch(e.request).catch(()=> caches.match('./index.html')))
+  );
+});
