@@ -45,6 +45,8 @@ function renderDashboard(container, state, onChange){
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
         ${statTile('DAYS COMMITTED', days)}
         ${statTile('DIRECTIONS', v.directions.length)}
+        ${statTile('ACTIVE GOALS', state.goals.filter(g=>g.status!=='Completed').length)}
+        ${statTile('GOALS COMPLETED', state.goals.filter(g=>g.status==='Completed').length)}
         ${statTile('CHECK-INS LOGGED', v.realignLog.length)}
         ${statTile('DRIFT EVENTS', v.realignLog.filter(r=>!r.onTrack).length)}
       </div>
@@ -53,7 +55,7 @@ function renderDashboard(container, state, onChange){
     <div class="card" style="opacity:.55;">
       <p class="eyebrow">Coming next</p>
       <p style="font-size:13px; color:var(--text-dim); margin:0;">
-        Goals, Daily Execution, Learning vs Shipping, Achievements and Analytics will populate this dashboard as each module ships.
+        Daily Execution, Learning vs Shipping, Project Tracker, Achievements and Analytics will populate this dashboard as each module ships.
       </p>
     </div>
   `;
