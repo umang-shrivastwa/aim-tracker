@@ -4,8 +4,8 @@
   "description": "Personal Execution Operating System — vision, execution, learning and shipping in one place.",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#0F1626",
-  "theme_color": "#0F1626",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
   "orientation": "portrait-primary",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
