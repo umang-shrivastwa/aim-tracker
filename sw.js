@@ -1,4 +1,4 @@
-const CACHE = 'execos-v1';
+const CACHE = 'execos-v2';
 const ASSETS = [
   './',
   './index.html',
