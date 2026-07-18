@@ -321,3 +321,33 @@ input[type=range]{ width:100%; accent-color: var(--amber); }
 }
 .task-text{ flex:1; font-size: 14px; }
 .task-text.done{ color: var(--text-dim); text-decoration: line-through; }
+
+/* ---------- More hub ---------- */
+.more-list{ display:flex; flex-direction:column; gap:8px; }
+.more-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  text-align:left;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor:pointer;
+  color: var(--text);
+}
+.more-row.unbuilt{ opacity:.7; }
+.more-icon{ font-size: 20px; width: 28px; text-align:center; color: var(--amber); flex-shrink:0; }
+.more-text{ flex:1; display:flex; flex-direction:column; gap:2px; }
+.more-label{ font-family: var(--font-display); font-size: 14.5px; }
+.more-desc{ font-size: 11.5px; color: var(--text-dim); }
+.more-status{
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px 8px;
+  letter-spacing: .05em;
+}
