@@ -23,6 +23,14 @@ function renderDashboard(container, state, onChange){
   const lastEntry = v.realignLog[v.realignLog.length - 1];
 
   container.innerHTML = `
+    ${state.criticalTasks.filter(t=>!t.completed).length ? `
+      <div class="card critical-banner" id="criticalBanner">
+        <p class="eyebrow" style="color:var(--danger);">⚠ Critical · ${state.criticalTasks.filter(t=>!t.completed).length} open</p>
+        ${state.criticalTasks.filter(t=>!t.completed).slice(0,3).map(t => `<div class="critical-line">${escapeHtml(t.title)}</div>`).join('')}
+        <button class="icon-btn" id="goCriticalBtn" style="width:100%; margin-top:8px; font-size:11px;">View all →</button>
+      </div>
+    ` : ''}
+
     <p class="eyebrow">Today's mission</p>
 
     <div class="card" style="text-align:center;">
@@ -62,7 +70,7 @@ function renderDashboard(container, state, onChange){
     <div class="card" style="opacity:.55;">
       <p class="eyebrow">Coming next</p>
       <p style="font-size:13px; color:var(--text-dim); margin:0;">
-        Critical Tasks, Reflection and Analytics will populate this dashboard as each module ships.
+        Reflection and Analytics will populate this dashboard as each module ships.
       </p>
     </div>
   `;
@@ -76,6 +84,9 @@ function renderDashboard(container, state, onChange){
   const offBtn = container.querySelector('#offTrackBtn');
   if (onBtn) onBtn.addEventListener('click', ()=> bindCheckIn(true));
   if (offBtn) offBtn.addEventListener('click', ()=> bindCheckIn(false));
+
+  const goCriticalBtn = container.querySelector('#goCriticalBtn');
+  if (goCriticalBtn) goCriticalBtn.addEventListener('click', ()=> window.navigate('critical'));
 }
 
 function statTile(label, value){
