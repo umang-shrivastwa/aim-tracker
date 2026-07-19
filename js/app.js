@@ -4,6 +4,12 @@
   const tabbar = document.getElementById('tabbar');
   const driftPill = document.getElementById('driftPill');
 
+  function applyTheme(s){
+    document.body.classList.toggle('light-theme', s.settings.theme === 'light');
+  }
+  window.applyTheme = applyTheme;
+  applyTheme(state);
+
   const LOCKED_LABELS = {
     more: 'More modules'
   };
@@ -30,7 +36,7 @@
     view.appendChild(node);
   }
 
-  const SUB_ROUTES_UNDER_MORE = ['learning', 'shipping', 'projects', 'achievements', 'critical', 'reflection', 'analytics'];
+  const SUB_ROUTES_UNDER_MORE = ['learning', 'shipping', 'projects', 'achievements', 'critical', 'reflection', 'analytics', 'settings'];
 
   function navigate(route){
     const highlightRoute = SUB_ROUTES_UNDER_MORE.includes(route) ? 'more' : route;
@@ -50,6 +56,7 @@
     else if (route === 'critical') renderCritical(view, state, onChange);
     else if (route === 'reflection') renderReflection(view, state, onChange);
     else if (route === 'analytics') renderAnalytics(view, state, onChange);
+    else if (route === 'settings') renderSettings(view, state, onChange);
     else renderLocked(route);
 
     window.location.hash = route;
@@ -65,5 +72,5 @@
 
   updateDriftPill();
   const startRoute = (window.location.hash || '#dashboard').slice(1);
-  navigate(['dashboard','vision','goals','daily','more','learning','shipping','projects','achievements','critical','reflection','analytics'].includes(startRoute) ? startRoute : 'dashboard');
+  navigate(['dashboard','vision','goals','daily','more','learning','shipping','projects','achievements','critical','reflection','analytics','settings'].includes(startRoute) ? startRoute : 'dashboard');
 })();
