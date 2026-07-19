@@ -1,4 +1,4 @@
-const CACHE = 'execos-v9';
+const CACHE = 'execos-v11';
 const ASSETS = [
   './',
   './index.html',
@@ -12,8 +12,10 @@ const ASSETS = [
   './js/projects.js',
   './js/achievements.js',
   './js/critical.js',
+  './js/reflection.js',
   './js/more.js',
   './js/dashboard.js',
+  './js/analytics.js',
   './js/app.js',
   './manifest.json'
 ];
