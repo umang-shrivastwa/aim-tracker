@@ -6,7 +6,7 @@ const MORE_MODULES = [
   { id: 'critical', icon: '⚠', label: 'Critical Tasks', desc: 'Must finish soon, stays visible', built: true },
   { id: 'reflection', icon: '◑', label: 'Daily Reflection', desc: 'Learned, built, tomorrow', built: true },
   { id: 'analytics', icon: '▥', label: 'Analytics', desc: 'Stats generated from your own data', built: true },
-  { id: 'settings', icon: '⚙', label: 'Settings', desc: 'Theme, backup, export', built: false }
+  { id: 'settings', icon: '⚙', label: 'Settings', desc: 'Theme, backup, export', built: true }
 ];
 
 function renderMore(container, state, onChange){
