@@ -377,3 +377,12 @@ input[type=range]{ width:100%; accent-color: var(--amber); }
 }
 .timeline-top{ display:flex; align-items:center; justify-content:space-between; }
 .timeline-content{ padding-bottom: 4px; }
+
+/* ---------- Critical banner on dashboard ---------- */
+.critical-banner{ border-color: var(--danger); border-style: dashed; }
+.critical-line{
+  font-size: 13.5px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.critical-line:last-of-type{ border-bottom: none; }
