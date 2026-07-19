@@ -17,6 +17,19 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
+body.light-theme{
+  --ink: #F4F4F0;
+  --panel: #FFFFFF;
+  --panel-raised: #ECECE7;
+  --brass: #0A0A0A;
+  --amber: #0A0A0A;
+  --teal: #4A4A4A;
+  --text: #0A0A0A;
+  --text-dim: #6A6A6A;
+  --danger: #B33B3B;
+  --border: rgba(0,0,0,0.14);
+}
+
 *{ box-sizing: border-box; }
 html,body{ height:100%; }
 body{
@@ -142,7 +155,7 @@ h1,h2,h3{ font-family: var(--font-display); margin:0; color: var(--text); }
 }
 .btn-primary{
   background: linear-gradient(180deg, var(--amber), var(--brass));
-  color: #0A0A0A;
+  color: var(--ink);
   border: none;
 }
 .btn:active{ transform: scale(0.98); }
