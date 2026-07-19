@@ -3,7 +3,7 @@ const MORE_MODULES = [
   { id: 'shipping', icon: '▲', label: 'Shipping Tracker', desc: 'What you actually built and shipped', built: true },
   { id: 'projects', icon: '◫', label: 'Project Tracker', desc: 'Multi-stage projects like Fingyaan', built: true },
   { id: 'achievements', icon: '★', label: 'Achievement Timeline', desc: 'Your growth, recorded', built: true },
-  { id: 'critical', icon: '⚠', label: 'Critical Tasks', desc: 'Must finish soon, stays visible', built: false },
+  { id: 'critical', icon: '⚠', label: 'Critical Tasks', desc: 'Must finish soon, stays visible', built: true },
   { id: 'reflection', icon: '◑', label: 'Daily Reflection', desc: 'Learned, built, tomorrow', built: false },
   { id: 'analytics', icon: '▥', label: 'Analytics', desc: 'Stats generated from your own data', built: false },
   { id: 'settings', icon: '⚙', label: 'Settings', desc: 'Theme, backup, export', built: false }
