@@ -2,6 +2,9 @@
 const STORAGE_KEY = 'execOS:v1';
 
 const DEFAULT_STATE = {
+  settings: {
+    theme: 'dark'
+  },
   vision: {
     statement: '',
     directions: [],        // [{id, title, note}]
