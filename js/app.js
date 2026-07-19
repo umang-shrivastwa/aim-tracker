@@ -30,7 +30,7 @@
     view.appendChild(node);
   }
 
-  const SUB_ROUTES_UNDER_MORE = ['learning', 'shipping', 'projects', 'achievements', 'critical'];
+  const SUB_ROUTES_UNDER_MORE = ['learning', 'shipping', 'projects', 'achievements', 'critical', 'reflection', 'analytics'];
 
   function navigate(route){
     const highlightRoute = SUB_ROUTES_UNDER_MORE.includes(route) ? 'more' : route;
@@ -48,6 +48,8 @@
     else if (route === 'projects') renderProjects(view, state, onChange);
     else if (route === 'achievements') renderAchievements(view, state, onChange);
     else if (route === 'critical') renderCritical(view, state, onChange);
+    else if (route === 'reflection') renderReflection(view, state, onChange);
+    else if (route === 'analytics') renderAnalytics(view, state, onChange);
     else renderLocked(route);
 
     window.location.hash = route;
@@ -63,5 +65,5 @@
 
   updateDriftPill();
   const startRoute = (window.location.hash || '#dashboard').slice(1);
-  navigate(['dashboard','vision','goals','daily','more','learning','shipping','projects','achievements','critical'].includes(startRoute) ? startRoute : 'dashboard');
+  navigate(['dashboard','vision','goals','daily','more','learning','shipping','projects','achievements','critical','reflection','analytics'].includes(startRoute) ? startRoute : 'dashboard');
 })();
