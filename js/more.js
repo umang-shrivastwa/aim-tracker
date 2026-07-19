@@ -4,8 +4,8 @@ const MORE_MODULES = [
   { id: 'projects', icon: '◫', label: 'Project Tracker', desc: 'Multi-stage projects like Fingyaan', built: true },
   { id: 'achievements', icon: '★', label: 'Achievement Timeline', desc: 'Your growth, recorded', built: true },
   { id: 'critical', icon: '⚠', label: 'Critical Tasks', desc: 'Must finish soon, stays visible', built: true },
-  { id: 'reflection', icon: '◑', label: 'Daily Reflection', desc: 'Learned, built, tomorrow', built: false },
-  { id: 'analytics', icon: '▥', label: 'Analytics', desc: 'Stats generated from your own data', built: false },
+  { id: 'reflection', icon: '◑', label: 'Daily Reflection', desc: 'Learned, built, tomorrow', built: true },
+  { id: 'analytics', icon: '▥', label: 'Analytics', desc: 'Stats generated from your own data', built: true },
   { id: 'settings', icon: '⚙', label: 'Settings', desc: 'Theme, backup, export', built: false }
 ];
 
